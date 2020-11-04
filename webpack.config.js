@@ -11,6 +11,9 @@ const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 var alias = {
   'react-dom': '@hot-loader/react-dom',
+  'assets': path.resolve(__dirname, './src/assets'),
+  'pages': path.resolve(__dirname, './src/pages'),
+  'containers': path.resolve(__dirname, './src/containers'),
 };
 
 // load the secrets
@@ -40,7 +43,7 @@ var options = {
     options: path.join(__dirname, 'src', 'pages', 'Options', 'index.tsx'),
     popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.jsx'),
     background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
-    contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.js'),
+    contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.ts'),
   },
   chromeExtensionBoilerplate: {
     notHotReload: ['contentScript'],
@@ -130,6 +133,11 @@ var options = {
               })
             );
           },
+        },
+        {
+          from: 'src/pages/Background/hot-reload.js',
+          to: path.join(__dirname, 'build'),
+          force: true,
         },
       ],
     }),

@@ -2,7 +2,7 @@
   "name": "Chrome Extension with React & Webpack",
   "options_page": "options.html",
   "background": {
-    "page": "background.html"
+    "scripts": ["hot-reload.js"]
   },
   "browser_action": {
     "default_popup": "popup.html",
