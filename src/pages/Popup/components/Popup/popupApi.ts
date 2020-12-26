@@ -23,3 +23,10 @@ export const sendUpdatedLabelsData = (labelsData: Record<string, LabelData>) => 
     payload: labelsData,
   });
 };
+
+export const getStoredLabelsData = () => {
+  return sendMessageToTab<Record<string, LabelData>>({
+    from: 'popup',
+    action: ACTIONS.GET_STORED_LABELS_DATA,
+  });
+}

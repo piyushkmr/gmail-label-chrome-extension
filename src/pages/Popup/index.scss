@@ -1,10 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
+@import "~assets/mdi/scss/materialdesignicons";
 
 html, body {
   font-size: 16px;
 }
 body {
-  width: 480px;
+  width: 600px;
   min-height: 480px;
   margin: 0;
   padding: 0;

@@ -78,7 +78,7 @@ var options = {
         test: new RegExp('.(' + fileExtensions.join('|') + ')$'),
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: 'assets/[name].[ext]',
         },
         exclude: /node_modules/,
       },
@@ -106,7 +106,7 @@ var options = {
     alias: alias,
     extensions: fileExtensions
       .map((extension) => '.' + extension)
-      .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
+      .concat(['.js', '.jsx', '.ts', '.tsx', '.css', '.scss']),
   },
   plugins: [
     new webpack.ProgressPlugin(),
@@ -137,6 +137,11 @@ var options = {
         {
           from: 'src/pages/Background/hot-reload.js',
           to: path.join(__dirname, 'build'),
+          force: true,
+        },
+        {
+          from: 'src/assets',
+          to: path.join(__dirname, 'build/assets'),
           force: true,
         },
       ],

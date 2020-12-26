@@ -9,6 +9,7 @@ export enum ACTIONS {
   GET_LABELS,
   GET_THEME,
   UPDATE_LABELS_DATA,
+  GET_STORED_LABELS_DATA,
 }
 
 const getActiveTab = (): Promise<chrome.tabs.Tab> => {

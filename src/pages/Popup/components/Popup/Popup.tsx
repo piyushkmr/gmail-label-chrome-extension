@@ -6,8 +6,10 @@ import './Popup.scss';
 import {
   fetchLabelsFromPage,
   fetchThemeFromPage,
+  getStoredLabelsData,
   sendUpdatedLabelsData,
 } from './popupApi';
+import { IconSelector } from 'pages/Popup/components/IconSelector';
 
 export interface LabelData {
   iconName: string;
@@ -43,6 +45,9 @@ export class Popup extends Component<{}, PopupState> {
     super(props);
     this.fetchLabels();
     this.fetchTheme();
+    getStoredLabelsData().then((labelsData) => {
+      this.setState({ labelsData });
+    });
   }
 
   setLabelData = (labelName: string, labelData: LabelData) => {
@@ -92,12 +97,11 @@ export class Popup extends Component<{}, PopupState> {
                 {labelNames.map((labelName) => {
                   const labelData = labelsData[labelName];
                   return (
-                    <div className="label-column label-name">
+                    <div className="label-column label-name" key={labelName}>
                       {labelData?.iconName ? (
                         <span className="label-icon-container">
-                          <img
-                            className="label-icon-img"
-                            src={labelData?.iconName}
+                          <span
+                            className={`label-icon-img mdi mdi-${labelData.iconName}`}
                           />
                         </span>
                       ) : (
@@ -114,6 +118,7 @@ export class Popup extends Component<{}, PopupState> {
                 const labelData = this.getLabelData(labelName);
                 return (
                   <LabelRow
+                    key={labelName}
                     labelName={labelName}
                     iconName={labelData.iconName}
                     onChange={this.handleLabelDataChange}
@@ -121,6 +126,7 @@ export class Popup extends Component<{}, PopupState> {
                 );
               })}
             </div>
+            <IconSelector />
           </div>
         )}
       </div>

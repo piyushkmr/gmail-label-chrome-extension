@@ -11,12 +11,15 @@ interface LabelRowProps {
 export const LabelRow = (props: LabelRowProps) => {
   const [labelData, setLabelData] = useState({ iconName: props.iconName });
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    let newLabelData = { ...labelData, [name]: value };
-    setLabelData(newLabelData);
-    props.onChange(props.labelName, newLabelData);
-  }, []);
+  const handleValueChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.currentTarget;
+      let newLabelData = { ...labelData, [name]: value };
+      setLabelData(newLabelData);
+      props.onChange(props.labelName, newLabelData);
+    },
+    []
+  );
 
   return (
     <div className="label-row">
@@ -24,9 +27,10 @@ export const LabelRow = (props: LabelRowProps) => {
         <input
           className="form-control form-control-sm"
           name="iconName"
-          onChange={handleChange}
+          onChange={handleValueChange}
           defaultValue={props.iconName}
           type="text"
+          placeholder="Icon name or URL"
         />
       </div>
       <input
